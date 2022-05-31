@@ -10,20 +10,28 @@ class ClipboardsController extends Controller
 {
     public function index()
     {
-        // dd(Clipboard::all());
-        return view('clipboards.index');
+        //
+    }
+
+    public function create()
+    {
+        return view('clipboards.create');
     }
 
     public function store(Request $request)
     {
-        if (is_null($request->get('custom_id')) == 1) {
+        if (is_null($request->get('id')) == true) {
             $id = IdGenerator::generate([
                 'table' => 'clipboards',
                 'length' => 6,
                 'prefix' => 'C',
             ]);
         } else {
-            $id = $request->get('custom_id');
+            request()->validate([
+                'id' => ['required', 'min:6', 'max:6', 'unique:clipboards'],
+            ]);
+
+            $id = $request->get('id');
         }
 
         $clipboard = new Clipboard();
@@ -31,19 +39,19 @@ class ClipboardsController extends Controller
         $clipboard->content = $request->get('copies');
         $clipboard->save();
 
-        return redirect('/');
-        // return $request->all();
-    }
-
-    public function successful(Clipboard $clipboard)
-    {
+        $host = request()->getHttpHost();
         return view('clipboards.successful', [
-            'clipboard'=>$clipboard
+            'clipboard'=>$clipboard,
+            'host'=>$host,
         ]);
     }
 
-    public function viewAll()
+    public function show(Clipboard $clipboard)
     {
-        dd(Clipboard::all());
+        $host = request()->getHttpHost();
+        return view('clipboards.show', [
+            'clipboard'=>$clipboard,
+            'host'=>$host,
+        ]);
     }
 }

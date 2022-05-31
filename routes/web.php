@@ -15,21 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-
-//     $config = [
-//         'table'=>'clipboards',
-//         'length'=>6,
-//         'prefix'=>''
-//     ];
-
-//     return view('welcome');
-// });
-
-Route::get('/', [ClipboardsController::class, 'index']);
-
+Route::get('/', [ClipboardsController::class, 'create']);
 Route::post('/store', [ClipboardsController::class, 'store']);
-
-Route::get('/clips/{clipboard}/successful', [ClipboardsController::class, 'successful']);
-
-Route::get('/viewall', [ClipboardsController::class, 'viewAll']);
+Route::get('/{clipboard}', [ClipboardsController::class, 'show']);

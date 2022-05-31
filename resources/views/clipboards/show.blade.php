@@ -15,7 +15,7 @@
     <section class="flex justify-center items-center w-screen h-screen">
         <div class="flex flex-col justify-center w-4/5 max-w-md max-h-[500px] bg-gradient-to-br from-[#1A1B26] to-[#464750] outline outline-offset-2 outline-1 outline-white rounded-2xl">
             <div class="m-2 flex flex-col justify-center items-center">
-                <h1 class="text-3xl text-center text-white font-bold m-10">Link created!</h1>
+                <h1 class="text-3xl text-center text-white font-bold m-10">Your Clipboard</h1>
 
                 <form action="/" class="w-4/5">
                     <div class="my-2">
